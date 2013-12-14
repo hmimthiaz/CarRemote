@@ -10,111 +10,65 @@
 
 @interface ViewController ()
 
+@property (nonatomic, strong) JoyStickControl * control;
+
 @end
 
 @implementation ViewController
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad{
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
     bleShield = [[BLE alloc] init];
     [bleShield controlSetup];
     bleShield.delegate = self;
+    
+    [self.view addSubview:self.control];
 }
 
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
-}
-
-// Called when scan period is over to connect to the first found peripheral
--(void) connectionTimer:(NSTimer *)timer
-{
-    if(bleShield.peripherals.count > 0)
-    {
+-(void) connectionTimer:(NSTimer *)timer{
+    if(bleShield.peripherals.count > 0){
         [bleShield connectPeripheral:[bleShield.peripherals objectAtIndex:0]];
-    }
-    else
-    {
+    }else{
         [self.spinner stopAnimating];
     }
 }
 
--(void) bleDidReceiveData:(unsigned char *)data length:(int)length
-{
+-(void) bleDidReceiveData:(unsigned char *)data length:(int)length{
     NSData *d = [NSData dataWithBytes:data length:length];
     NSString *s = [[NSString alloc] initWithData:d encoding:NSUTF8StringEncoding];
     NSLog(@"Received: %@",s);
 }
 
 
-- (void) bleDidDisconnect
-{
-
-    [self.buttonForward setEnabled:NO];
-    [self.buttonReverse setEnabled:NO];
-    [self.buttonRight setEnabled:NO];
-    [self.buttonLeft setEnabled:NO];
-
-    
+- (void) bleDidDisconnect{
     [self.buttonConnect setImage:[UIImage imageNamed:@"disconnect"] forState:UIControlStateNormal];
 }
 
--(void) bleDidConnect
-{
+-(void) bleDidConnect{
     [self.spinner stopAnimating];
     [self.buttonConnect setImage:[UIImage imageNamed:@"connect"] forState:UIControlStateNormal];
-    
-    [self.buttonForward setEnabled:YES];
-    [self.buttonReverse setEnabled:YES];
-    [self.buttonRight setEnabled:YES];
-    [self.buttonLeft setEnabled:YES];
+}
+
+- (void)receivedCommand:(NSString *)commandString{
+    NSLog(@"Received Command: %@",commandString);
+    [self BLEShieldSendCommand:commandString];
     
 }
 
-
-- (IBAction)buttonNavigationTouched:(UIButton *)button{
-    if (button.tag==1) {
-        NSLog(@"Command: Forward");
-        [self BLEShieldSendCommand:@"MF"];
-    }else if (button.tag==2) {
-        NSLog(@"Command: Reverse");
-        [self BLEShieldSendCommand:@"MR"];
-    }else if (button.tag==3) {
-        NSLog(@"Command: Right");
-        [self BLEShieldSendCommand:@"TR"];
-    }else if (button.tag==4) {
-        NSLog(@"Command: Left");
-        [self BLEShieldSendCommand:@"TL"];
-    }
-    
-    
-}
-
-- (IBAction)buttonNavigationReleased:(UIButton *)button{
-    NSLog(@"Command: Stop");
-    [self BLEShieldSendCommand:@"SA"];
-}
 
 - (void)BLEShieldSendCommand:(NSString *)commandText{
-    NSString * commandString = [NSString stringWithFormat:@"%@\r\n", commandText];
-    NSData * commandDataToSend = [commandString dataUsingEncoding:NSUTF8StringEncoding];
-    [bleShield write:commandDataToSend];
+    if (bleShield.activePeripheral.state==CBPeripheralStateConnected) {
+        NSString * commandString = [NSString stringWithFormat:@"%@\r\n", commandText];
+        NSData * commandDataToSend = [commandString dataUsingEncoding:NSUTF8StringEncoding];
+        [bleShield write:commandDataToSend];
+    }
 }
 
-- (IBAction)BLEShieldScan:(id)sender
-{
+- (IBAction)BLEShieldScan:(id)sender{
     if (bleShield.activePeripheral)
-        if(bleShield.activePeripheral.isConnected)
-        {
+        if(bleShield.activePeripheral.state==CBPeripheralStateConnected){
             [[bleShield CM] cancelPeripheralConnection:[bleShield activePeripheral]];
             return;
         }
@@ -127,6 +81,14 @@
     [NSTimer scheduledTimerWithTimeInterval:(float)3.0 target:self selector:@selector(connectionTimer:) userInfo:nil repeats:NO];
     
     [self.spinner startAnimating];
+}
+
+- (JoyStickControl *)control{
+    if (_control==nil) {
+        _control = [[JoyStickControl alloc] initWithFrame:CGRectMake(0, 200, 320, 320)];
+        [_control setDelegate:self];
+    }
+    return _control;
 }
 
 @end

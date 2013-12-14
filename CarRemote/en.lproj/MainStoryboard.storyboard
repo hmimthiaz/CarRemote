@@ -28,62 +28,6 @@
                                     <action selector="BLEShieldScan:" destination="2" eventType="touchUpInside" id="4uZ-l4-sRL"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" tag="4" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" id="Tun-gB-gHr">
-                                <rect key="frame" x="20" y="299" width="80" height="80"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.94771144701086962" green="0.88559149070198395" blue="0.89656491792739568" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <state key="normal" image="direction_left.png">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="buttonNavigationReleased:" destination="4" eventType="touchUpInside" id="Jw1-0p-pIz"/>
-                                    <action selector="buttonNavigationReleased:" destination="4" eventType="touchUpOutside" id="MLJ-PN-MnW"/>
-                                    <action selector="buttonNavigationTouched:" destination="4" eventType="touchDown" id="M5f-bh-Npv"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" tag="3" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" id="d59-yw-Kd5">
-                                <rect key="frame" x="220" y="299" width="80" height="80"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.94771144701086962" green="0.88559149070198395" blue="0.89656491792739568" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <state key="normal" image="direction_right.png">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="buttonNavigationReleased:" destination="4" eventType="touchUpInside" id="2AG-yK-Uf1"/>
-                                    <action selector="buttonNavigationReleased:" destination="4" eventType="touchUpOutside" id="V6z-Ln-zZj"/>
-                                    <action selector="buttonNavigationTouched:" destination="4" eventType="touchDown" id="1Gs-Sh-5Cu"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" tag="1" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" id="1FU-bd-ZWI">
-                                <rect key="frame" x="120" y="220" width="80" height="80"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.94771144701086962" green="0.88559149070198395" blue="0.89656491792739568" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <state key="normal" image="direction_up.png">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="buttonNavigationReleased:" destination="4" eventType="touchUpInside" id="5Dp-Ot-36U"/>
-                                    <action selector="buttonNavigationReleased:" destination="4" eventType="touchUpOutside" id="Tfd-uD-zJi"/>
-                                    <action selector="buttonNavigationTouched:" destination="4" eventType="touchDown" id="3Gm-jb-eI0"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" tag="2" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" id="WZ4-Lb-HSN">
-                                <rect key="frame" x="121" y="380" width="80" height="80"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.94771144701086962" green="0.88559149070198395" blue="0.89656491792739568" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <state key="normal" image="direction_down.png">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="buttonNavigationReleased:" destination="4" eventType="touchUpInside" id="Bcg-rZ-g5r"/>
-                                    <action selector="buttonNavigationReleased:" destination="4" eventType="touchUpOutside" id="kBc-w1-Biz"/>
-                                    <action selector="buttonNavigationTouched:" destination="4" eventType="touchDown" id="ZqU-xr-cV7"/>
-                                </connections>
-                            </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="truck.png" id="pto-Rr-n6Z">
                                 <rect key="frame" x="236" y="71" width="64" height="64"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -100,10 +44,6 @@
                     </view>
                     <connections>
                         <outlet property="buttonConnect" destination="czu-zc-ckI" id="shs-nx-C32"/>
-                        <outlet property="buttonForward" destination="1FU-bd-ZWI" id="NO8-wi-KfU"/>
-                        <outlet property="buttonLeft" destination="Tun-gB-gHr" id="3Th-Ey-ToN"/>
-                        <outlet property="buttonReverse" destination="WZ4-Lb-HSN" id="wgh-2O-Yn4"/>
-                        <outlet property="buttonRight" destination="d59-yw-Kd5" id="UcS-91-483"/>
                         <outlet property="spinner" destination="9xq-kn-Wvv" id="9JQ-2a-gv4"/>
                     </connections>
                 </viewController>
@@ -112,10 +52,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="direction_down.png" width="64" height="64"/>
-        <image name="direction_left.png" width="64" height="64"/>
-        <image name="direction_right.png" width="64" height="64"/>
-        <image name="direction_up.png" width="64" height="64"/>
         <image name="disconnect.png" width="48" height="48"/>
         <image name="truck.png" width="64" height="64"/>
     </resources>

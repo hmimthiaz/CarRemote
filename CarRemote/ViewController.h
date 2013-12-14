@@ -8,17 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import "BLE.h"
+#import "JoyStickControl.h"
 
-@interface ViewController : UIViewController <BLEDelegate> {
+
+@interface ViewController : UIViewController <BLEDelegate,JoyStickControlDelegate,UIAccelerometerDelegate> {
     BLE *bleShield;
 }
 
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *spinner;
 @property (weak, nonatomic) IBOutlet UIButton *buttonConnect;
-@property (weak, nonatomic) IBOutlet UIButton *buttonForward;
-@property (weak, nonatomic) IBOutlet UIButton *buttonReverse;
-@property (weak, nonatomic) IBOutlet UIButton *buttonLeft;
-@property (weak, nonatomic) IBOutlet UIButton *buttonRight;
 
 
 

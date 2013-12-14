@@ -50,36 +50,50 @@ void loop()
 
             Serial.print(" Char: ");
             char charBuf[5];
-            txtMsg.toCharArray(charBuf, 3);
+            txtMsg.toCharArray(charBuf, 5);
+            Serial.print(charBuf);
+            
+            Serial.print(" SpeedA: ");
+            int speedA = charBuf[2];
+            speedA = ( speedA - 48 ) * 28;
+            Serial.print( speedA );
+            
+            Serial.print(" SpeedB: ");
+            int speedB = charBuf[3];
+            speedB = (speedB - 48) * 28;
+            Serial.print( speedB );    
+      
+            analogWrite(PINPWMA, speedA);
+            analogWrite(PINPWMB, speedB);      
 
-            if ( charBuf[0] == 'S' && charBuf[1] == 'A')
+            if ( charBuf[0] == 'S' && charBuf[1] == 'S')
             {
-                motorStop(100);
+                motorStop(0);
                 Serial.print(" Action: Stop");
             }
 
-            if ( charBuf[0] == 'M' && charBuf[1] == 'F')
+            if ( charBuf[0] == 'F' && charBuf[1] == 'F')
             {
-                motorForward(100);
+                motorForward(0);
                 Serial.print(" Action: Forward");
             }
 
-            if ( charBuf[0] == 'M' && charBuf[1] == 'R')
+            if ( charBuf[0] == 'B' && charBuf[1] == 'B')
             {
-                motorReverse(100);
+                motorReverse(0);
                 Serial.print(" Action: Reverse");
             }
 
-            if ( charBuf[0] == 'T' && charBuf[1] == 'R')
+            if ( charBuf[0] == 'B' && charBuf[1] == 'F')
             {
-                motorTurnRight(100);
-                Serial.print(" Action: Right");
+                motorTurnLeft(0);
+                Serial.print(" Action: Left");
             }
 
-            if ( charBuf[0] == 'T' && charBuf[1] == 'L')
+            if ( charBuf[0] == 'F' && charBuf[1] == 'B')
             {
-                motorTurnLeft(100);
-                Serial.print(" Action: Left");
+                motorTurnRight(0);
+                Serial.print(" Action: Right");
             }
 
             Serial.println(";");
